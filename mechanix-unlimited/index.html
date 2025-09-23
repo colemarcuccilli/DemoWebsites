@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanix Unlimited - Professional Auto Repair</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #e74c3c;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23444" width="1200" height="600"/><text x="600" y="300" text-anchor="middle" fill="%23888" font-size="24">Auto Repair Shop</text></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            background: #e74c3c;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+        }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #2c3e50;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: #e74c3c;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .contact-item h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background: #1a252f;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">Mechanix Unlimited</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Mechanix Unlimited</h1>
+            <p>Your trusted partner for professional automotive repair and maintenance services. Expert technicians, quality parts, and honest pricing.</p>
+            <a href="#contact" class="cta-button">Schedule Service</a>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Engine Repair</h3>
+                <p>Complete engine diagnostics, repair, and rebuilding services using state-of-the-art equipment.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚗</div>
+                <h3>Brake Service</h3>
+                <p>Professional brake inspection, pad replacement, and full brake system maintenance.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Transmission</h3>
+                <p>Expert transmission repair, maintenance, and fluid changes for all vehicle types.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔋</div>
+                <h3>Electrical</h3>
+                <p>Advanced electrical system diagnostics and repair, including battery and alternator service.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">❄️</div>
+                <h3>AC Service</h3>
+                <p>Air conditioning repair, maintenance, and refrigerant recharge services.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛞</div>
+                <h3>Tire Service</h3>
+                <p>Tire installation, balancing, rotation, and alignment services for optimal performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <h2>About Mechanix Unlimited</h2>
+        <div class="about-content">
+            <div>
+                <h3>30+ Years of Experience</h3>
+                <p>Founded in 1993, Mechanix Unlimited has been serving the community with reliable automotive repair services. Our team of ASE-certified technicians brings decades of combined experience to every job.</p>
+                <ul style="margin-top: 20px; padding-left: 20px;">
+                    <li>ASE Certified Technicians</li>
+                    <li>State-of-the-Art Equipment</li>
+                    <li>Quality Parts & Materials</li>
+                    <li>Honest, Transparent Pricing</li>
+                    <li>Customer Satisfaction Guarantee</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Why Choose Us?</h3>
+                <p>We understand that your vehicle is an important investment. That's why we treat every car, truck, and SUV with the same care and attention we'd give our own vehicles.</p>
+                <p style="margin-top: 15px;">Our commitment to excellence, combined with our modern facility and experienced team, makes us the preferred choice for automotive repair in the area.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>📍 Location</h3>
+                <p>123 Auto Repair Lane<br>
+                Mechanics City, MC 12345</p>
+            </div>
+            <div class="contact-item">
+                <h3>📞 Phone</h3>
+                <p>(555) 123-CARS<br>
+                (555) 123-2277</p>
+            </div>
+            <div class="contact-item">
+                <h3>🕒 Hours</h3>
+                <p>Mon-Fri: 7:00 AM - 6:00 PM<br>
+                Sat: 8:00 AM - 4:00 PM<br>
+                Sun: Closed</p>
+            </div>
+            <div class="contact-item">
+                <h3>✉️ Email</h3>
+                <p>info@mechanixunlimited.com<br>
+                service@mechanixunlimited.com</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Mechanix Unlimited. All rights reserved. | Professional Auto Repair Services</p>
+    </footer>
+</body>
+</html>
