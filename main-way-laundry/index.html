@@ -532,7 +532,7 @@
             }
 
             .nav-menu {
-                display: none;
+                display: none !important;
                 position: fixed;
                 top: 70px;
                 left: 0;
@@ -545,7 +545,7 @@
             }
 
             .nav-menu.active {
-                display: flex;
+                display: flex !important;
             }
 
             .nav-menu a {
@@ -592,12 +592,29 @@
                 gap: 30px;
             }
 
+            /* Hide all videos on mobile completely */
             .hero-video,
-            .service-video {
+            .service-video,
+            video {
+                display: none !important;
                 pointer-events: none;
                 -webkit-touch-callout: none;
                 -webkit-user-select: none;
                 user-select: none;
+            }
+
+            /* Use background image instead for hero on mobile */
+            .hero {
+                background: linear-gradient(rgba(74,144,226,0.8), rgba(123,179,240,0.8)), url('./assets/laundrymatcouple.avif') center/cover;
+            }
+
+            /* Hide video in service cards on mobile */
+            .service-card video {
+                display: none !important;
+            }
+
+            .service-card {
+                background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
             }
         }
 

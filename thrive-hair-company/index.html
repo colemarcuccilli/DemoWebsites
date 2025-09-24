@@ -488,7 +488,7 @@
             }
 
             .nav-menu {
-                display: none;
+                display: none !important;
                 position: fixed;
                 top: 70px;
                 left: 0;
@@ -501,7 +501,7 @@
             }
 
             .nav-menu.active {
-                display: flex;
+                display: flex !important;
             }
 
             .nav-menu a {
@@ -548,12 +548,29 @@
                 gap: 30px;
             }
 
+            /* Hide all videos on mobile completely */
             .hero-video,
-            .service-video {
+            .service-video,
+            video {
+                display: none !important;
                 pointer-events: none;
                 -webkit-touch-callout: none;
                 -webkit-user-select: none;
                 user-select: none;
+            }
+
+            /* Use background image instead for hero on mobile */
+            .hero {
+                background: linear-gradient(rgba(139,75,107,0.7), rgba(195,155,211,0.7)), url('./assets/imageedit_4_7151574666.jpg') center/cover;
+            }
+
+            /* Hide video in service cards on mobile */
+            .service-card video {
+                display: none !important;
+            }
+
+            .service-card {
+                background: linear-gradient(135deg, #f8e5f0, #f0d5e5);
             }
         }
 
