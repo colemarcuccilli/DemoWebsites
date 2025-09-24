@@ -442,21 +442,262 @@
             color: #b3d9ff;
         }
 
+        /* Hamburger Menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            position: relative;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Prevent video fullscreen on mobile - more comprehensive */
+        video::-webkit-media-controls-fullscreen-button {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-play-button {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-timeline {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        video:fullscreen {
+            position: relative !important;
+        }
+
+        video:-webkit-full-screen {
+            position: relative !important;
+        }
+
+        video:-moz-full-screen {
+            position: relative !important;
+        }
+
+        video:-ms-fullscreen {
+            position: relative !important;
+        }
+
+        video {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
         @media (max-width: 768px) {
             .hero-content h1 {
-                font-size: 2.8rem;
+                font-size: 2.2rem;
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 1002;
             }
 
             .nav-menu {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #003d7a, #0056b3);
                 flex-direction: column;
-                gap: 15px;
+                padding: 20px;
+                gap: 20px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu a {
+                padding: 10px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                text-align: center;
+                font-size: 1.1rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+                padding: 0 20px;
             }
 
             .section h2 {
                 font-size: 2rem;
             }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .service-card {
+                padding: 25px 20px;
+            }
+
+            .features-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .location-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero-video,
+            .service-video {
+                pointer-events: none;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 50px 15px;
+            }
+
+            .logo-image {
+                height: 40px;
+            }
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent video controls and fullscreen with enhanced mobile protection
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                // Remove all controls
+                video.controls = false;
+                video.removeAttribute('controls');
+
+                // Force inline playback
+                video.playsInline = true;
+                video.setAttribute('webkit-playsinline', 'true');
+                video.setAttribute('playsinline', 'true');
+                video.setAttribute('x5-playsinline', 'true');
+                video.setAttribute('x5-video-player-type', 'h5');
+                video.setAttribute('x-webkit-airplay', 'deny');
+                video.setAttribute('disablePictureInPicture', 'true');
+                video.setAttribute('controlsList', 'nodownload nofullscreen noremoteplayback');
+
+                // Disable all interactions
+                video.style.pointerEvents = 'none';
+                video.style.userSelect = 'none';
+                video.style.webkitUserSelect = 'none';
+
+                // Prevent all click/touch events
+                video.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); return false; });
+                video.addEventListener('touchstart', e => { e.preventDefault(); e.stopPropagation(); return false; });
+                video.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); return false; });
+                video.addEventListener('contextmenu', e => { e.preventDefault(); return false; });
+
+                // Force exit fullscreen if somehow entered
+                video.addEventListener('webkitbeginfullscreen', e => {
+                    e.preventDefault();
+                    video.webkitExitFullscreen();
+                });
+                video.addEventListener('webkitendfullscreen', e => {
+                    e.preventDefault();
+                });
+
+                // Keep video playing
+                video.play().catch(() => {});
+            });
+
+            // Mobile menu toggle
+            const menuToggle = document.createElement('button');
+            menuToggle.className = 'menu-toggle';
+            menuToggle.innerHTML = '<span></span><span></span><span></span>';
+            menuToggle.setAttribute('aria-label', 'Toggle menu');
+
+            const navContainer = document.querySelector('.nav-container');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (navContainer && navMenu) {
+                navContainer.appendChild(menuToggle);
+
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+
+                // Close menu when clicking a link
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navContainer.contains(e.target) && navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body>
     <header class="header">
@@ -477,7 +718,7 @@
     </header>
 
     <section id="home" class="hero">
-        <video class="hero-video" autoplay muted loop>
+        <video class="hero-video" autoplay muted loop playsinline webkit-playsinline disablePictureInPicture>
             <source src="./assets/Person_Doing_Laundry_In_Laundromat_fhd_3351850.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -493,7 +734,7 @@
         <h2>Our Services</h2>
         <div class="services-grid">
             <div class="service-card">
-                <video class="service-video" autoplay muted loop>
+                <video class="service-video" autoplay muted loop playsinline webkit-playsinline disablePictureInPicture>
                     <source src="./assets/Laundry_Washing_fhd_282753.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -511,7 +752,7 @@
                 <p>State-of-the-art washers and dryers available 24/7 for your convenience. Various load sizes to meet your needs.</p>
             </div>
             <div class="service-card">
-                <video class="service-video" autoplay muted loop>
+                <video class="service-video" autoplay muted loop playsinline webkit-playsinline disablePictureInPicture>
                     <source src="./assets/Woman_Looking_At_The_Camera_In_A_Laundromat_fhd_3326806.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -542,7 +783,7 @@
                 <p>Professional dry cleaning services for delicate fabrics, business attire, and special garments.</p>
             </div>
             <div class="service-card">
-                <video class="service-video" autoplay muted loop>
+                <video class="service-video" autoplay muted loop playsinline webkit-playsinline disablePictureInPicture>
                     <source src="./assets/Man_Admires_Inside_Of_Washing_Machine_fhd_1702962.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
